@@ -1,0 +1,127 @@
+<Window x:Class="RoguelikeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Roguelike WPF"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Black"
+        KeyDown="Window_KeyDown"
+        KeyUp="Window_KeyUp">
+
+    <Grid x:Name="mainGrid">
+
+        <Image Source="fon/Zombifon.png"
+               Stretch="UniformToFill"
+               Panel.ZIndex="0"/>
+
+        <Viewbox Stretch="Uniform" Panel.ZIndex="1">
+            <Canvas Name="gameCanvas"
+                    Width="640"
+                    Height="416"
+                    Background="Transparent"/>
+        </Viewbox>
+
+        <TextBlock Name="weaponText"
+                   Text="Зброя: Пістолет"
+                   FontSize="14"
+                   Foreground="White"
+                   Background="#40000000"
+                   Padding="5"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="20,10,0,0"
+                   Panel.ZIndex="20"/>
+
+        <TextBlock Name="hpText"
+                   Text="Здоров’я: 5 / 5"
+                   FontSize="14"
+                   Foreground="Red"
+                   Background="#40000000"
+                   Padding="5"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="20,40,0,0"
+                   Panel.ZIndex="20"/>
+        <TextBlock Name="damageText"
+           Text="Урон: 1"
+           FontSize="14"
+           Foreground="Orange"
+           Background="#40000000"
+           Padding="5"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Top"
+           Margin="20,70,0,0"
+           Panel.ZIndex="20"/>
+        <TextBlock Name="speedText"
+           Text="Швидкість: 3"
+           FontSize="14"
+           Foreground="LightBlue"
+           Background="#40000000"
+           Padding="5"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Top"
+           Margin="20,100,0,0"
+           Panel.ZIndex="20"/>
+        <TextBlock Name="ammoText"
+           Text="Патрони: 10 / 10"
+           FontSize="14"
+           Foreground="Yellow"
+           Background="#40000000"
+           Padding="5"
+           HorizontalAlignment="Left"
+           VerticalAlignment="Top"
+           Margin="20,130,0,0"
+           Panel.ZIndex="20"/>
+
+        <!-- Головне меню -->
+        <Grid Name="MainMenu"
+              Background="#AA000000"
+              Visibility="Visible"
+              Panel.ZIndex="100"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Border Padding="20" Background="#CC111111" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Width="250">
+
+                    <StackPanel.Resources>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock Text="🧱 Roguelike" FontSize="28" Foreground="White"
+                               HorizontalAlignment="Center" Margin="0,0,0,20" TextAlignment="Center"/>
+                    <Button Content="▶ Почати гру" Click="StartGame_Click" Margin="5"/>
+                    <Button Content="🔫 Список зброї" Click="SelectWeapon_Click" Margin="5"/>
+                    <Button Content="🏆 Таблиця рекордів" Click="ShowRecords_Click" Margin="5"/>
+
+                    <TextBlock Text="🔧 Режим вікна:" Foreground="White" Margin="10,20,0,5"/>
+                    <RadioButton GroupName="WindowMode" Content="🖼️ З рамками" Name="windowedRadio" Margin="5" Checked="WindowMode_Checked"/>
+                    <RadioButton GroupName="WindowMode" Content="🪟 Без рамок" Name="borderlessRadio" Margin="5" Checked="WindowMode_Checked"/>
+                    <RadioButton GroupName="WindowMode" Content="🧱 Повноекранний" Name="fullscreenRadio" Margin="5" IsChecked="True" Checked="WindowMode_Checked"/>
+
+                    <Button Content="⏹ Вихід" Click="ExitGame_Click" Margin="20,20,5,5"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Панель вибору зброї -->
+        <Grid Name="WeaponSelectPanel"
+              Background="#AA000000"
+              Visibility="Collapsed"
+              Panel.ZIndex="200"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Border Padding="20" Background="#CC111111" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Width="250">
+                    <TextBlock Text="Виберіть зброю:" FontSize="20" Foreground="White" Margin="0,0,0,20" TextAlignment="Center"/>
+                    <Button Content="Пістолет" Click="PistolButton_Click" Margin="5"/>
+                    <Button Content="Дробовик" Click="ShotgunButton_Click" Margin="5"/>
+                    <Button Content="Автомат" Click="AutoButton_Click" Margin="5"/>
+                    <Button Content="Назад" Click="HideWeaponSelectPanel_Click" Margin="20,20,5,5"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
